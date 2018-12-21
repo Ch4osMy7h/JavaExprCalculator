@@ -2,6 +2,8 @@ import org.w3c.dom.Text;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.nio.DoubleBuffer;
@@ -55,6 +57,7 @@ public class MainFrame extends JFrame{
 
 
         calculator = new Calculator(text);
+
 
         //根据分辨率设置窗口大小
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -204,6 +207,58 @@ public class MainFrame extends JFrame{
         panelFourth.add(buttonClear);
         panelFourth.add(buttonTan);
         this.add(panelFourth);
+
+
+        //键盘监听类
+        textField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                char key = e.getKeyChar();
+                switch (key) {
+                    case '0':
+                        onPushButton0Clicked(); break;
+                    case '1':
+                        onPushButton1Clicked(); break;
+                    case '2':
+                        onPushButton2Clicked(); break;
+                    case '3':
+                        onPushButton3Clicked(); break;
+                    case '4':
+                        onPushButton4Clicked(); break;
+                    case '5':
+                        onPushButton5Clicked(); break;
+                    case '6':
+                        onPushButton6Clicked(); break;
+                    case '7':
+                        onPushButton7Clicked(); break;
+                    case '8':
+                        onPushButton8Clicked(); break;
+                    case '9':
+                        onPushButton9Clicked(); break;
+                    case '=':
+                        onPushButtonEqualClicked(); break;
+                    case '*':
+                        onPushButtonMultiClicked(); break;
+                    case '/':
+                        onPushButtonDivClicked(); break;
+                    case '+':
+                        onPushButtonAddClicked(); break;
+                    case '-':
+                        onPushButtonSubClicked(); break;
+                    case '^':
+                        onPushButtonExpClicked(); break;
+                    case '(':
+                        onPushButtonLeftBracketClicked(); break;
+                    case ')':
+                        onPushButtonRightBracketClicked(); break;
+                    case '\b':
+                        onPushButtonDelClicked(); break;
+
+
+                }
+            }
+        });
+
     }
 
     private void onPushButtonTanClicked() {
@@ -232,6 +287,7 @@ public class MainFrame extends JFrame{
     }
 
     private void onPushButtonEqualClicked() {
+        text = textField.getText();
         calculator = new Calculator(text);
         try {
             Double res = calculator.calcRes();
@@ -357,4 +413,5 @@ public class MainFrame extends JFrame{
         textField.setText(text);
     }
 }
+
 
